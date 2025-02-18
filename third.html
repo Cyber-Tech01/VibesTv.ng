@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <title>VibesTv Ads Submission</title>
+  <style>
+    body {
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 15px;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #f4f4f4;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    
+    header {
+      width: 100%;
+      color: white;
+      background: #ff0000;
+      padding: 15px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    
+    .container {
+      width: 90%;
+      background: white;
+      max-width: 900px;
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+    }
+    
+    h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 10px 0 5px;
+      text-align: left;
+    }
+    
+    select, input, textarea {
+      font-size: 14px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      outline: none;
+      padding: 10px;
+      width: 80%;
+      border: 1px solid #ccc;
+    }
+    
+    textarea {
+      resize: vertical;
+      height: 80px;
+    }
+    
+    button {
+      background: #c40000;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    button:hover {
+      background: #ff4d00;
+    }
+    
+    /* Stylish radio button */
+    input[type="radio"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #c40000;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    
+    input[type="radio"]:checked {
+      background-color: #c40000;
+      border-color: #c40000;
+    }
+    
+    input[type="radio"]::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: 0.2s ease-in-out;
+    }
+    
+    input[type="radio"]:checked::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    /* Container for radio buttons to align left */
+    .radio-container {
+      text-align: left;
+      width: 80%;
+      margin: auto;
+      margin-bottom: 15px;
+    }
+    
+    .radio-option {
+      display: inline-block;
+      margin-right: 20px;
+    }
+    
+    footer {
+      margin-top: 100px;
+      background: white;
+      text-align: center;
+      border-top: 2px solid #ccc;
+      box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.1);
+      padding-top: 40px;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VibesTv Premium Ads Submission</h1>
+  </header>
+  
+  <div class="container">
+    <h2>Submit Your Advertisement</h2>
+    <p>Note: This form will help us to know which ads you are rendering for</p>
+    <form id="adform">
+      <label for="adtype">Select Advertisement Type</label>
+      <select id="adtype" required>
+        <option value="" disabled selected>Choose ads type...</option>
+        <option value="Business">Business</option>
+        <option value="Product">Product</option>
+        <option value="Service">Service</option>
+        <option value="Event">Event</option>
+      </select>
+      
+      <label for="business">Business / Product / Service Name</label>
+      <input type="text" id="business" placeholder="Enter name" required>
+      
+      <label for="location">Location (Optional)</label>
+      <input type="text" id="location" placeholder="Enter location">
+      
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" placeholder="Enter phone number" required>
+      
+      <label>Premium Ads (Select one)</label>
+      <div class="radio-container">
+        <div class="radio-option">
+          <input type="radio" id="premiumYes" name="premium" value="Yes">
+          <label for="premiumYes" style="display: inline;">Yes</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" id="premiumNo" name="premium" value="No" checked>
+          <label for="premiumNo" style="display: inline;">No</label>
+        </div>
+      </div>
+      
+      <label for="details">Ad Details</label>
+      <textarea id="details" placeholder="Enter ad details" required></textarea>
+      
+      <button type="submit">Submit Advertisement</button>
+    </form>
+  </div>
+  <footer class="con">
+    &copy; 2025 VibesTv | Theme: Home for Naija Entertainment
+  </footer>
+  <script>
+    document.getElementById('adform').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      let adtype = document.getElementById('adtype').value;
+      let business = document.getElementById('business').value;
+      let location = document.getElementById('location').value || "Not Provided";
+      let phone = document.getElementById('phone').value;
+      let details = document.getElementById('details').value;
+      // Get the selected premium value from radio buttons
+      let premium = document.querySelector('input[name="premium"]:checked').value;
+
+      let message = `Hello VibesTv, I want to place an ad.\n\nAd Type: ${adtype}\nName: ${business}\nLocation: ${location}\nPhone: ${phone}\nPremium User: ${premium}\nDetails: ${details}`;
+      
+      let whatsappUrl = `https://wa.me/2349134881254?text=${encodeURIComponent(message)}`;
+      
+      window.location.href = whatsappUrl;
+    });
+  </script>
+</body>
+</html>
