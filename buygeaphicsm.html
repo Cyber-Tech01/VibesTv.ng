@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Buy Graphics Designs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 18px;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Header Section */
+header {
+  color: white;
+  background: #ff0000;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  box-sizing:border-box;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container1{
+  background:white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  margin:20px auto;
+  border-radius:8px;
+  line-height: 1.6;
+}
+
+progress {
+      width: 100%;
+      height: 20px;
+      margin-top: 10px;
+      display: none; /* hidden by default */
+    }
+    
+    label{
+  display:block;
+  margin-top: 10px;
+  font-weight:bold;
+}
+
+input, textarea, select{
+  width:70%;
+  font-size: 14;
+  outline:none;
+  border:1px solid #ccc;
+  border-radius:5px;
+  margin-bottom: 15px;
+  padding:10px;
+  box-sizing: border-box;
+}
+
+textarea{
+  resize: vertical;
+  height: 80px;
+}
+
+button{
+  width:100%;
+  color:white;
+  background:#ff0000;
+  border:none;
+  padding:10px 15px;
+  border-radius:5px;
+}
+
+button:hover{
+  background: orange;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VibesTv Studio form submission</h1>
+  </header>
+    <div class="container1">
+    <h2>Contact Us</h2>
+    <hr />
+    <p>Have a project in mind or need professional graphics services? Let's connect</p>
+    <form action="" id="contact">
+      <label for="name">Enter Whatsapp Name</label>
+      <input type="text" id="name" placeholder="e.g. John Doe" required />
+      
+      <label for="subject">Subject:</label>
+      <select name="subject" id="subject" required>
+        <option value="" disabled selected>Select Design Type</option>
+        <option value="logo">Logo Design</option>
+        <option value="Social Media Graphics">Social Media Graphics</option>
+        <option value="branding">Branding</option>
+        <option value="other">Other</option>
+      </select>
+      
+      <label for="message">Enter Your Design Details</label>
+      <textarea name="message" id="message" placeholder="Enter message on how you want your design"></textarea>
+      
+      <button type="submit">Submit</button>
+      <p id="para"></p>
+      <progress id="progressbar" value="0" max="100"></progress>
+    </div>
+    
+    <script>
+      document.getElementById('contact').addEventListener('submit',function(event) {
+        event.preventDefault();
+        
+        let name = document.getElementById('name').value
+        
+        let subject = document.getElementById('subject').value
+        
+        let message = document.getElementById('message').value
+        
+        let para = document.getElementById('para')
+        
+        para.textContent = "Loading"
+        
+        let progressbar = document.getElementById('progressbar')
+        
+        progressbar.style.display = "block";
+        progressbar.value = 0;
+        
+        
+        progress = 0;
+        const interval = setInterval(() => {
+          
+          progress += 3.33;
+          if (progress> 100) {
+            progress = 100;
+            progressbar.value = progress
+            
+            clearInterval();
+            para.innerText = "Loading complete. Redirecting to Whatsapp..."
+            para.style.color = 'red'
+          }
+        }, 100)
+        
+        const whatsappMessage = `Hello VibesTv 👋, my name is ${name} and I would like to request a ${subject} design. Please see my design details: ${message}`;
+        
+        const whatsappUrl = `https://wa.me/2349134881254?text=${encodeURIComponent(whatsappMessage)}`;
+        
+        setTimeout(() => {
+          window.location.href = whatsappUrl;
+        },3000)
+      })
+    </script>
+</body>
+</html>

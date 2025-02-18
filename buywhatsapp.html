@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <title>Whatsapp Order Form & Payment</title>
+  <style>
+    body {
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 18px;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 15px;
+      background: #ff0000;
+      color: white;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+    label {
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin: 5px 0 15px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #25d366;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button:hover {
+      background: #1ebe5d;
+    }
+
+    footer {
+      margin-top: 20px;
+      background: white;
+      box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>VibesTv Whatsapp Order Form</h1>
+  </header>
+
+  <div class="container">
+    <h2>Buy Whatsapp Active Contacts Files</h2>
+    <form id="orderForm">
+      <label for="name">Full name:</label>
+      <input type="text" id="name" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" required>
+
+      <label for="category">Select Contact Category:</label>
+      <select id="category" required>
+        <option value="Business Contacts">Business Contacts</option>
+        <option value="Marketing Leads">Marketing Leads</option>
+        <option value="General Audience">General Audience</option>
+      </select>
+
+      <label for="payment">Payment method:</label>
+      <select name="payment" id="payment" onchange="updatePaymentDetails()"  >
+        <option value="">Select Payment Method...</option>
+        <option value="Bank">Bank Transfer</option>
+        <option value="Paypal">Paypal</option>
+        <option value="others">Others</option>
+      </select>
+
+      <button type="button" id="bankBtn" class="hidden" onclick="showDetails('bank');">Click to see Bank Details</button>
+      <button type="button" id="paypalBtn" class="hidden" onclick="showDetails('paypal');">Click to see Paypal Details</button>
+
+      <label for="fileUpload">Upload Image:</label>
+      <input type="file" name="fileUpload" id="fileUpload" >
+
+      <button type="submit">Send Order Via WhatsApp</button>
+    </form>
+
+    <div id="bankDetails" class="hidden">
+      <h3>Bank Transfer Details</h3>
+      <p><strong>Bank Name: MoniePoint MFB</strong></p>
+      <p><strong>Account Number: 9134881254</strong></p>
+      <p><strong>Account Holder: Amodeni Taiwo</strong></p>
+    </div>
+
+    <div id="paypalDetails" class="hidden">
+      <h3>Paypal Details</h3>
+      <p><strong>Currently not available, go for bank details instead.</strong></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 VibesTv.ng | All Rights Reserved.
+  </footer>
+
+  <script>
+    function updatePaymentDetails() {
+      let paymentMethod = document.getElementById('payment').value;
+      let bankBtn = document.getElementById('bankBtn');
+      let paypalBtn = document.getElementById('paypalBtn');
+
+      bankBtn.classList.add("hidden");
+      paypalBtn.classList.add("hidden");
+
+      if (paymentMethod === "Bank") {
+        bankBtn.classList.remove("hidden");
+      } else if (paymentMethod === "Paypal") {
+        paypalBtn.classList.remove("hidden");
+      }
+    }
+
+    function showDetails(type) {
+      let bankDetails = document.getElementById('bankDetails');
+      let paypalDetails = document.getElementById('paypalDetails');
+
+      bankDetails.classList.add("hidden");
+      paypalDetails.classList.add("hidden");
+
+      if (type === "bank") {
+        bankDetails.classList.remove('hidden');
+      } else if (type === "paypal") {
+        paypalDetails.classList.remove('hidden');
+      }
+    }
+
+    function sendOrder(event) {
+      event.preventDefault();
+
+      let name = document.getElementById('name').value;
+      let phone = document.getElementById('phone').value;
+      let category = document.getElementById('category').value;
+      let paymentMethod = document.getElementById('payment').value || "This is not necessary anymore";
+      let fileInput = document.getElementById('fileUpload');
+
+      let fileName = fileInput.files.length ? fileInput.files[0].name : "No file uploaded";
+
+      let whatsappMessage =
+        "Order Details: \n" +
+        "Name: " + name + "\n" +
+        "WhatsApp Number: " + phone + "\n" +
+        "Contact Category: " + category + "\n" +
+        "Payment Method: " + paymentMethod + "\n" +
+        "File uploaded: " + fileName + "\n\n\n" +
+        "*Please complete payment using the selected method and attach the file manually in WhatsApp if required.*";
+
+      let whatsappNumber = "+2349134881254";
+      let url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
+
+      window.open(url);
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', sendOrder);
+  </script>
+</body>
+
+</html>
